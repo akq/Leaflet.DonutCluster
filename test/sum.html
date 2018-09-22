@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leaflet Demo</title>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+    <link href='https://unpkg.com/leaflet@1.3.4/dist/leaflet.css' rel='stylesheet' />
+    <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script src="../src/Leaflet.DonutCluster.js"></script>
+
+    <script>
+        function mockPoints(total) {
+            var types = ['A', 'B', 'C', 'D'],
+                x = [0, 120],
+                y = [30, 60],
+                result = [],
+                i = 0;
+            while (i++ < total) {
+                var lat = Math.random() * (y[1] - y[0]) + y[0],
+                    long = Math.random() * (x[1] - x[0]) + x[0],
+                    type = types[Math.floor(Math.random() * types.length)];
+                result.push([lat, long, type, (Math.floor(Math.random() * 100000)+100000)])
+            }
+            return result;
+        }
+        var map = L.map('map').setView([40.0484, 116.286976], 3);
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+
+        var markers = L.DonutCluster({
+            chunkedLoading: true
+        }, {
+            key: 'title'
+            , sumField: 'value'
+            , arcColorDict: {
+                            A: 'red',
+                            B: 'blue',
+                            C: 'yellow',
+                            D: 'black'
+                        }
+        })
+
+
+        // var markers = L.markerClusterGroup();
+        var points = mockPoints(2000);
+
+        for (var i = 0; i < points.length; i++) {
+            var a = points[i];
+            var title = a[2];
+            var marker = L.marker(L.latLng(a[0], a[1]), {
+                title: title
+                , value: a[3]
+            });
+
+
+            marker.bindPopup(title+'<br>'+a[3]);
+            markers.addLayer(marker);
+        }
+
+        map.addLayer(markers);
+    </script>
+</body>
+
+</html>

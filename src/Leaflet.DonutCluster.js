@@ -242,7 +242,7 @@
 
             if (!sumField)
                 blocks[s]++;
-            else blocks[s] += points[i][sumField];
+            else blocks[s] += points[i].options[sumField];
         }
         var list = [];
 
