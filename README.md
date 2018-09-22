@@ -18,6 +18,7 @@ First include the Leaflet.DonutCluster.js, but you don't need to include the css
 ```javascript
 text.setAttribute('style', ...)
 ```
+Then use L.DonutCluster to create a markercluster instance.
 ```javascript
                 //create the markercluster
                 var markers = L.DonutCluster(
