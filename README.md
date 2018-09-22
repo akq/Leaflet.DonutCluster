@@ -6,8 +6,8 @@ A lightweight standalone [Leaflet](https://leafletjs.com)  plugin to display don
 
 **Only depends on Leaflet and Leaflet.markercluster, NOT on other chart library like d3.js**
 
-[Online Demo -- basic](https://jsfiddle.net/b43c1xkf/1/embedded/result,html/)
-[Online Demo -- sum by field](https://jsfiddle.net/mfxd015b/embedded/result,html/)
+- [Online Demo -- basic](https://jsfiddle.net/b43c1xkf/1/embedded/result,html/)
+- [Online Demo -- sum by field](https://jsfiddle.net/mfxd015b/1/embedded/result,html/)
 
 ![cluster map example](screenshot.png)
 

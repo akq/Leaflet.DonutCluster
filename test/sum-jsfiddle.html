@@ -80,7 +80,7 @@
                 var lat = Math.random() * (y[1] - y[0]) + y[0],
                     long = Math.random() * (x[1] - x[0]) + x[0],
                     type = types[Math.floor(Math.random() * types.length)];
-                result.push([lat, long, type])
+                result.push([lat, long, type, (Math.floor(Math.random() * 100000)+100000)])
             }
             return result;
         }
