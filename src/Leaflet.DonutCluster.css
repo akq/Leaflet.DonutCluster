@@ -1,0 +1,11 @@
+.donut-text {
+    color: black;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: 2;
+    line-height: 0;
+    width: 100%;
+    text-align: center;
+}
