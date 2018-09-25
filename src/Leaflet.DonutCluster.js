@@ -217,27 +217,37 @@
         return arc;
     };
 
-    function createDonut(points, key, sumField, cfgFn) {
+    function createDonut(points, opt, cfgFn) {
         var blocks = {},
             count = points.length,
-            fieldList = [],
-            fieldDict = {},
-            titleDict = {},
+            key = opt.key,
+            sumField = opt.sumField, 
+            fieldList = opt.order || (opt.order = []),
+            fieldDict = opt.orderDict || (opt.orderDict={}),
+            titleDict = opt.title || {},
             cfg = {};
         if (typeof cfgFn == 'function')
             cfg = cfgFn(points);
         else if (typeof cfgFn == 'object') {
             cfg = cfgFn
         }
+        if(Array.isArray(opt.title) && opt.order){
+            titleDict =  {};
+            for(var i in opt.title){
+                titleDict[opt.order[i]] = opt.title[i]
+            }
+            opt.title = titleDict;
+        }
+        for(var i in fieldList){
+            fieldDict[fieldList[i]] = 1;
+        }
+
         for (var i = 0; i < count; i++) {
             var s = points[i].options[key]
             if (!blocks[s]) blocks[s] = 0;
             if (!fieldDict[s]) {
                 fieldDict[s] = 1;
                 fieldList.push(s);
-                if (cfg.title) {
-                    titleDict[s] = points[i][cfg.title]
-                }
             }
 
             if (!sumField)
@@ -246,21 +256,20 @@
         }
         var list = [];
 
-        for (var j in fieldList) {
-            var s = fieldList[j];
+        for(var i in fieldList){
+            var s = fieldList[i];
             list.push({
                 value: blocks[s] || 0,
                 name: s,
                 title: titleDict[s],
                 active: cfg.active && cfg.active == s
-            });
+            });            
         }
-
-
 
         var size = cfg.size || 50,
             weight = cfg.weight || 10,
-            colors = cfg.colors;;
+            colors = cfg.colors;
+            
         var myDonut = donut({
             size: size,
             weight: weight,
@@ -323,10 +332,11 @@
      * 
      */
     L.DonutCluster = function (opt, donutOpt) {
+
+
         var createIcon = function (cluster) {
             var markers = cluster.getAllChildMarkers();
-
-            var myDonut = createDonut(markers, donutOpt.key, donutOpt.sumField, function (points) {
+            var myDonut = createDonut(markers, donutOpt, function (points) {
                 var style;
                 if (!donutOpt.style) {
                     style = defaultStyle(points)
@@ -340,7 +350,6 @@
                     weigth: style.weight,
                     colors: donutOpt.arcColorDict,
                     fillColor: style.fill
-
                 }
             })
 

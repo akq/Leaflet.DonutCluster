@@ -28,9 +28,11 @@ Then use L.DonutCluster to create a markercluster instance.
                     }
                     //the second parameter is  DonutCluster's configuration file
                     , {
-                    key: 'title', //indicates the grouped field, set it in the options of marker
-                    sumField: 'value', // indicates the value field to sum. set it in the options of marker
-                    arcColorDict: { // the ark color for each group.
+                    key: 'title', //mandotary, indicates the grouped field, set it in the options of marker
+                    sumField: 'value', // optional, indicates the value field to sum. set it in the options of marker
+                    order: ['A', 'D', 'B', 'C'], // optional, indicates the group order.
+                    title: ['Type A','Type D','Type B','Type C' ], // optional, indicates the group title, when it is an array, the order option must be specified. or use an object.{A:'Type A',D: 'Type D',B:'Type B',C:'Type C' }
+                    arcColorDict: { // mandotary, the arc color for each group.
                         A: 'red',
                         B: 'blue',
                         C: 'yellow',
