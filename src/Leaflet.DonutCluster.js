@@ -95,8 +95,16 @@
 
         svg.setAttribute('height', size0 + 'px');
         svg.setAttribute('width', size0 + 'px');
-        svg.innerHTML = '<circle cx="' + size0 / 2.0 + '" cy="' + size0 / 2.0 + '" r="' + (arcRadius - weight / 2) + '" fill="' + fillColor + '" fill-opacity="0.6"></circle>'
 
+        var circle = doc.createElementNS(NS, 'circle');
+        circle.setAttribute('cx', size0 / 2.0);
+        circle.setAttribute('cy', size0 / 2.0);
+        circle.setAttribute('r', arcRadius - weight / 2);
+        circle.setAttribute('fill', fillColor);
+        circle.setAttribute('fill-opacity', 0.6);
+        svg.appendChild(circle);
+        // svg.innerHTML = '<circle cx="' + size0 / 2.0 + '" cy="' + size0 / 2.0 + '" r="' + (arcRadius - weight / 2) + '" fill="' + fillColor + '" fill-opacity="0.6"></circle>'
+        
         div.appendChild(svg);
 
         for (i = 0; i < data.length; i++) {
