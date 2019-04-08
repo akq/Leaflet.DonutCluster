@@ -14,7 +14,8 @@ A lightweight standalone [Leaflet](https://leafletjs.com)  plugin to display don
 
 
 ## Usage
-First include the Leaflet.DonutCluster.js, but you don't need to include the css file, as it's optional. if you want to include the css file, you can comment the line in the .js file. 
+First include the Leaflet.DonutCluster.js, if you want to improve your performance, you could include the optional Leaflet.DonutCluster.css file,  
+But you should comment the line 85 in the Leaflet.DonutCluster.js file as well. 
 ```javascript
 text.setAttribute('style', ...)
 ```
